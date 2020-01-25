@@ -1,0 +1,14 @@
+doctype html
+html(lang="ru")
+    head
+        block head
+            include includes/head
+
+    body
+        block content
+            section.main
+                p nothing
+
+        block append_block
+            script(src="js/polyfills.js?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))
+            script(src="js/global.js?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))

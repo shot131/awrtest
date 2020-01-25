@@ -1,0 +1,23 @@
+extends ../root.pug
+
+prepend head
+    - var title = 'Вход';
+    - var description = 'Вход на сайт';
+
+block content
+    .section.main-section.d-flex.align-items-center.justify-content-center
+        form.form.form_small.border.border-primary.rounded.p-4
+            h1.h2.mb-4 Пожалуйста войдите
+            .div.alert.alert-danger(role="alert") <strong>Авторизация не удалась.</strong> Пожалуйста, проверьте правильность введённых логина и пароля.
+            .form-group
+                label(for="form-email") Логин:
+                input.form-control.form-control-lg(type="text", id="form-email", placeholder="Логин", required, autofocus)
+            .form-group
+                label(for="form-password") Пароль:
+                input.form-control.form-control-lg(type="password", id="form-password", placeholder="Пароль", required)
+            .form-row.d-flex.align-items-center.mt-4
+                .form-group.col-6
+                    button.btn.btn-lg.btn-primary(type="submit") Войти
+                .form-group.form-check.col-6
+                    input.form-check-input(type="checkbox", value="remember-me", id="remember-me-input")
+                    label.form-check-label(for="remember-me-input") Запомнить меня
