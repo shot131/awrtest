@@ -6,12 +6,12 @@ prepend head
 
 block content
     .section.main-section.d-flex.align-items-center.justify-content-center
-        form.form.form_small.border.border-primary.rounded.p-4
+        form.form.form_small.border.border-primary.rounded.p-4(action="", method="POST")
             h1.h2.mb-4 Пожалуйста войдите
             .div.alert.alert-danger(role="alert") <strong>Авторизация не удалась.</strong> Пожалуйста, проверьте правильность введённых логина и пароля.
             .form-group
-                label(for="form-email") Логин:
-                input.form-control.form-control-lg(type="text", id="form-email", placeholder="Логин", required, autofocus)
+                label(for="form-login") Логин:
+                input.form-control.form-control-lg(type="text", id="form-login", placeholder="Логин", required, autofocus)
             .form-group
                 label(for="form-password") Пароль:
                 input.form-control.form-control-lg(type="password", id="form-password", placeholder="Пароль", required)

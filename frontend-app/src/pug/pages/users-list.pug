@@ -1,0 +1,84 @@
+extends ../root.pug
+
+prepend head
+    - var title = 'Пользователи';
+    - var description = 'Просмотр пользователей';
+
+block content
+    .section.main-section.users-list
+        .container
+            .row.align-items-stretch.mt-4
+                .sidebar.col-12.col-md-4
+                    div.alert.alert-primary(role="alert") Добрый день, Alex
+                    ul.sidebar__nav.nav.flex-column.bg-light.pt-3.pb-3.rounded
+                        li.nav-item
+                            a.nav-link(href="/statistic.html") Статистика
+                        li.nav-item
+                            span.nav-link.active Пользователи
+                        li.nav-item
+                            span.nav-link
+                                a.btn.btn-sm.btn-secondary(href="/login.html") Выход
+                .content.col-12.col-md-8
+                    h1.h1 Пользователи
+                    div.mt-4
+                        a.btn.btn-primary.btn-lg(href="user.html") Новый пользователь
+                    table.table.table-hover.mt-4(data-component="users-list")
+                        caption Пользователи 1-10 из 67
+                        thead
+                            tr
+                                th(scope="col") ID
+                                th(scope="col") Логин
+                                th(scope="col") Действия
+                        tbody
+                            tr
+                                th(scope="row") 1
+                                td
+                                    a.btn.btn-link.btn-block.text-left(href="user.html") alex
+                                td
+                                    a.btn.btn-sm.btn-outline-danger(href="#", data-delete="true") Удалить
+                            tr
+                                th(scope="row") 2
+                                td
+                                    a.btn.btn-link.btn-block.text-left(href="user.html") grigoriy
+                                td
+                                    a.btn.btn-sm.btn-outline-danger(href="#", data-delete="true") Удалить
+                            tr
+                                th(scope="row") 5
+                                td
+                                    a.btn.btn-link.btn-block.text-left(href="user.html") stepan
+                                td
+                                    a.btn.btn-sm.btn-outline-danger(href="#", data-delete="true") Удалить
+                            tr
+                                th(scope="row") 18
+                                td
+                                    a.btn.btn-link.btn-block.text-left(href="user.html") Evgeniy
+                                td
+                                    a.btn.btn-sm.btn-outline-danger(href="#", data-delete="true") Удалить
+                            tr
+                                th(scope="row") 305
+                                td
+                                    a.btn.btn-link.btn-block.text-left(href="user.html") ludmila
+                                td
+                                    a.btn.btn-sm.btn-outline-danger(href="#", data-delete="true") Удалить
+                            tr
+                                th(scope="row") 63
+                                td
+                                    a.btn.btn-link.btn-block.text-left(href="user.html") bambey
+                                td
+                                    a.btn.btn-sm.btn-outline-danger(href="#", data-delete="true") Удалить
+                    nav
+                        ul.pagination
+                            li.page-item.disabled
+                                a.page-link(href="#", tabindex="-1", aria-disabled="true") &larr;
+                            li.page-item.active(aria-current="page")
+                                a.page-link(href="#") 1
+                            li.page-item
+                                a.page-link(href="#") 2
+                            li.page-item
+                                a.page-link(href="#") 3
+                            li.page-item
+                                a.page-link(href="#") 4
+                            li.page-item
+                                a.page-link(href="#") 5
+                            li.page-item
+                                a.page-link(href="#") &rarr;

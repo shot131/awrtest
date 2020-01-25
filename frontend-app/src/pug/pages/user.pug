@@ -1,0 +1,38 @@
+extends ../root.pug
+
+prepend head
+    - var title = 'Пользователь alex';
+    - var description = 'Редактирование пользователя alex';
+
+block content
+    .section.main-section.user
+        .container
+            .row.align-items-stretch.mt-4
+                .sidebar.col-12.col-md-4
+                    div.alert.alert-primary(role="alert") Добрый день, Alex
+                    ul.sidebar__nav.nav.flex-column.bg-light.pt-3.pb-3.rounded
+                        li.nav-item
+                            a.nav-link(href="/statistic.html") Статистика
+                        li.nav-item
+                            a.nav-link.active(href="/users-list.html") Пользователи
+                        li.nav-item
+                            span.nav-link
+                                a.btn.btn-sm.btn-secondary(href="/login.html") Выход
+                .content.col-12.col-md-8
+                    h1.h1 Редактирование пользователя alex
+                    .alert.alert-success.mt-4 Пользователь успешно сохранён
+                    form.form.mt-4
+                        .form-group
+                            label(for="form-login") Логин:
+                            input.form-control.form-control-lg(type="text", id="form-login", placeholder="Логин", required, autofocus)
+                        .form-group
+                            label(for="form-password") Пароль:
+                            input.form-control.form-control-lg(type="password", id="form-password", placeholder="Пароль", required)
+                        .form-group
+                            label(for="form-password") Пароль ещё раз:
+                            input.form-control.form-control-lg(type="password", id="form-password-2", placeholder="Пароль", required)
+                        .form-row.d-flex.align-items-center.mt-4
+                            .form-group.col-6
+                                button.btn.btn-lg.btn-primary(type="submit") Сохранить
+                            .form-group.form-check.col-6.text-right
+                                button.btn.btn-danger(type="submit") Удалить
