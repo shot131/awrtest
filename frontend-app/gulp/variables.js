@@ -25,7 +25,10 @@ module.exports.variables = {
     watch: {
         pug: 'src/pug/**/*.pug',
         js: 'src/js/**/*.js',
-        stylus: 'src/stylus/**/*.styl',
+        stylus: [
+            'src/stylus/**/*.styl',
+            'src/stylus/**/*.css',
+        ],
     },
     clean: './dist',
 };
