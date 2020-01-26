@@ -4,3 +4,4 @@
 /backup
 .env
 .log
+/awrtest/static
