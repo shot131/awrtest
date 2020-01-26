@@ -25,7 +25,7 @@ debconf-set-selections <<< "mysql-server mysql-server/root_password password $MY
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_PASSWORD"
 debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password password $MYSQL_PASSWORD"
 debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password $MYSQL_PASSWORD"
-apt-get install -y mysql-server mysql-client mysql-common
+apt-get install -y mysql-server mysql-client mysql-common default-libmysqlclient-dev
 update-rc.d mysql defaults
 service mysql start
 update-rc.d mysql enable

@@ -14,10 +14,10 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   env_vars = {
-    "MYSQL_PASSWORD" => "awr-test",
-    "MYSQL_DB_NAME" => "awr-test",
-    "SITE_NAME" => "awr-test",
-    "SITE_URL" => "awr-test.local",
+    "MYSQL_PASSWORD" => "awrtest",
+    "MYSQL_DB_NAME" => "awrtest",
+    "SITE_NAME" => "awrtest",
+    "SITE_URL" => "awrtest.local",
     "HOST_IP" => "192.168.56.101",
     "BACKUP_DIR" => "/vagrant/backup"
   }

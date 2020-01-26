@@ -20,13 +20,14 @@ block content
                                 a.btn.btn-sm.btn-secondary(href="/login.html") Выход
                 .content.col-12.col-md-8
                     h1.h1 Статистика
-                    form.form.statistic__filter.mt-4(action="/statistic.html", method="post")
+                    .statistic__chart.chart.mt-2.border.rounded.mt-4(id="stat-chart")
+                    form.form.statistic__filter.mt-4(id="stat-filter" action="/statistic.html", method="post")
                         .form-row.align-items-center
                             .col-auto
                                 label Начало диапазона:
                                 input.form-control(
                                     type="datetime-local",
-                                    name="stat_start",
+                                    name="stat-start",
                                     id="stat-start",
                                     pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}",
                                     min="2017-06-01T08:30",
@@ -36,7 +37,7 @@ block content
                                 label Конец диапазона:
                                 input.form-control(
                                     type="datetime-local",
-                                    name="stat_end",
+                                    name="stat-end",
                                     id="stat-end",
                                     pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}",
                                     min="2017-06-01T08:30",
@@ -47,6 +48,7 @@ block content
                                 select.custom-select(name="stat-step")
                                     option(value="5", selected) 5 минут
                                     option(value="30") 30 минут
-                    .statistic__chart.mt-2
-                        canvas.statistic__chart-canvas.border.rounded(id="stat-chart")
                     .alert.alert-secondary.mt-5(role="alert") <strong>Последняя активность клиента:</strong> 25 января 2020, 18:41:53
+    script(id="stat-tootip", type="text/x-template")
+        span <strong>Дата и время:</strong> ${date}<br>
+        span <strong>Значение:</strong> ${value}

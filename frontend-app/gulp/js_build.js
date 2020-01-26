@@ -10,6 +10,7 @@ const config = {
     output: {
         filename: '[name].js',
         library: '[name]',
+        publicPath: variables.PRODUCTION ? variables.deploy_dist.public_path : variables.dist.public_path,
     },
     module: {
         rules: [{
@@ -50,10 +51,13 @@ module.exports = function jsBuild() {
     return gulp.src(variables.src.js)
         .pipe(named())
         .pipe(webpack(config, null))
-        .on('error', notify.onError({
-            message: '<%= error.message %>',
-            title: 'Webpack',
-        }))
+        .on('error', function(error) {
+            notify.onError({
+                message: '<%= error.message %>',
+                title: 'Webpack',
+            });
+            this.emit('end');
+        })
         .pipe(gulp.dest(variables.dist.js))
         .pipe(gulpIf(variables.DEPLOY, gulp.dest(variables.deploy_dist.js)));
 };

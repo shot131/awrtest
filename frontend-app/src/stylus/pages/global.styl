@@ -1,4 +1,5 @@
-@import "../bootstrap-4.4.1-dist/css/bootstrap.css"
+@import "../../../node_modules/bootstrap/dist/css/bootstrap.css"
+@import "../../../node_modules/tippy.js/dist/tippy.css"
 @import "../blocks/form.styl"
 
 .main-section
@@ -7,11 +8,9 @@
 .nav
     &-link
         &.active
-            color #17a2b8
+            color #555
 
-.statistic
-    &__chart
-        min-height 300px
-        &-canvas
-            width 100%
-            height 100%
+.chart
+    &__canvas
+        width 100%
+        height auto

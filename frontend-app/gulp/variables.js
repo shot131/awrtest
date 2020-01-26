@@ -2,14 +2,16 @@ module.exports.variables = {
     DEPLOY: process.argv.includes('--deploy'),
     PRODUCTION: process.argv.includes('--production'),
     deploy_dist: {
-        html: '../../public/assets/',
-        js: '../../public/assets/js/',
-        css: '../../public/assets/css',
+        html: '../awrtest/static/awrtest/',
+        js: '../awrtest/static/awrtest/js/',
+        css: '../awrtest/static/awrtest/css',
+        public_path: '/static/awrtest/js/',
     },
     dist: {
         html: 'dist/',
         js: 'dist/js/',
         css: 'dist/css',
+        public_path: 'js/',
     },
     src: {
         pug: [
