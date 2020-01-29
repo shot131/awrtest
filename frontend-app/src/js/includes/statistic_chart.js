@@ -91,12 +91,12 @@ const Drawer = (function() {
     let container;
     let svg;
     let hoverLine;
+    let tooltipTitleTemplate;
 
     const defaultSteps = { x: 10, y: 8 };
     const size = { width: 700, height: 400 };
     const padding = { left: 70, bottom: 50 };
     const minMax = {};
-    const tooltipTitleTemplate = document.getElementById('stat-tootip').innerHTML;
     const intl = new Intl.NumberFormat();
 
     return {
@@ -286,6 +286,7 @@ const Drawer = (function() {
                 global.tippyHideAll = hideAll;
                     tippy('.chart__point', {
                     allowHTML: true,
+                    placement: 'right-end',
                 });
             });
         },
@@ -315,6 +316,7 @@ const Drawer = (function() {
             this.update();
         },
         init(root) {
+            tooltipTitleTemplate = document.getElementById('stat-tootip').innerHTML;
             import(/* webpackChunkName: "svgjs" */ '@svgdotjs/svg.js/src/svg').then(({ default: SVG }) => {
                 global.SVG = SVG;
                 container = root;
@@ -326,7 +328,7 @@ const Drawer = (function() {
                     if (point.x > padding.left) {
                         hoverLine.move(point.x, 0);
                         for (const cirlce of svg.find('.chart__point')) {
-                            if (hoverLine.inside(cirlce.cx(), cirlce.cy())) {
+                            if (Math.abs(cirlce.cx() - point.x) <= 1) {
                                 cirlce.stroke({ color: cirlce.data('color'), width: 3 });
                                 cirlce.node._tippy && cirlce.node._tippy.show();
                             } else {

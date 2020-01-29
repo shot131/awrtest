@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход{% endblock %}
+{% block description %}Вход на сайт{% endblock %}
+{% block main_section_modifiers %} d-flex align-items-center justify-content-center{% endblock %}
+
+{% block content %}
+    <form class="form form_small border border-primary rounded p-4" action="{% url 'custom_auth:login' %}" method="post">
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+        {% csrf_token %}
+        <h1 class="h2 mb-4">Пожалуйста войдите</h1>
+        {% if form.non_field_errors %}
+            <div class="div alert alert-danger" role="alert">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            <label for="form-login">Логин:</label>
+            <input class="form-control form-control-lg" type="text" name="username" id="form-login" placeholder="Логин" value="{{ form.username.value|default:'' }}" required{% if not form.username.value %} autofocus{% endif %}>
+        </div>
+        <div class="form-group">
+            <label for="form-password">Пароль:</label>
+            <input class="form-control form-control-lg" type="password" name="password" id="form-password" placeholder="Пароль" required{% if form.username.value %} autofocus{% endif %}>
+        </div>
+        <div class="form-row d-flex align-items-center mt-4">
+            <div class="form-group col-6">
+                <button class="btn btn-lg btn-primary" type="submit">Войти</button>
+            </div>
+            <div class="form-group form-check col-6">
+                <input class="form-check-input" type="checkbox" value="1" name="remember_me" id="remember-me-input"{% if form.remember_me.value %} checked{% endif %}>
+                <label class="form-check-label"for="remember-me-input">Запомнить меня</label>
+            </div>
+        </div>
+    </form>
+{% endblock %}

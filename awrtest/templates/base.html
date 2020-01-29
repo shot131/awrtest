@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="description" content="{% block description %}{% endblock %}">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'awrtest/css/global.css' %}">
+    </head>
+    <body>
+        <div class="section main-section{% block main_section_modifiers %}{% endblock %}">
+            {% block content %}{% endblock %}
+        </div>
+        <script src="{% static 'awrtest/js/polyfills.js' %}"></script>
+        <script src="{% static 'awrtest/js/vendors~global.js' %}"></script>
+        <script src="{% static 'awrtest/js/global.js' %}"></script>
+    </body>
+</html>

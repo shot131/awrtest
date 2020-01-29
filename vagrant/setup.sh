@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 apt-get update -y && apt-get upgrade -y
 apt-get install -y curl build-essential checkinstall software-properties-common tmux screen apt-transport-https lsb-release ca-certificates wget nano zip unzip mc openssl
-apt-get install -y  libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
+apt-get install -y  libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev gettext
 service sshd restart
 
 cd /opt

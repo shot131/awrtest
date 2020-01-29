@@ -10,10 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
+import os, sys
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -21,13 +23,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'o+hbzv%i3t=r57ra1#uz^()=_w@++c*%q70y!dh$o!_5o@tqys'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = [
-    '192.168.56.101',
-]
 
 
 # Application definition
@@ -39,6 +34,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.custom_auth',
+    'apps.statistic',
+    'apps.users',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +54,9 @@ ROOT_URLCONF = 'awrtest.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR + '/templates/',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,25 +70,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'awrtest.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'awrtest',
-        'USER': 'awrtest',
-        'PASSWORD': 'awrtest',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'TIME_ZONE': 'Europe/Moscow',
-        'OPTIONS': {
-            'init_command': 'SET default_storage_engine=INNODB',
-        }
-    }
-}
 
 
 # Password validation
@@ -128,4 +109,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static'), )
+
+LOGIN_URL = reverse_lazy('custom_auth:login')
+LOGIN_REDIRECT_URL = reverse_lazy('statistic:statistic')
+LOGOUT_REDIRECT_URL = reverse_lazy('custom_auth:login')
