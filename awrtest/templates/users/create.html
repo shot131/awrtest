@@ -1,77 +1,60 @@
 {% extends 'base.html' %}
 
-{% load users_utils %}
-
 {% block title %}Новый пользователь{% endblock %}
 {% block description %}Создание нового пользователя{% endblock %}
 {% block main_section_modifiers %} user{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row align-items-stretch mt-4">
-            <div class="sidebar col-12 col-md-4">
-                <div class="alert alert-primary" role="alert">Добрый день 1, Alex</div>
-                <ul class="sidebar__nav nav flex-column bg-light pt-3 pb-3 rounded">
-                    <li class="nav-item"><a class="nav-link" href="/statistic.html">Статистика</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="/users-list.html">Пользователи</a></li>
-                    <li class="nav-item"><span class="nav-link"><a class="btn btn-sm btn-secondary" href="/login.html">Выход</a></span>
-                    </li>
-                </ul>
-            </div>
-            <div class="content col-12 col-md-8">
-                <h1 class="h1">Создание пользователя</h1>
-                {% if messages %}
-                    <div class="alert alert-success mt-4">
-                        {% for message in messages %}
-                            <p>{{ message }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                {% if form.non_field_errors %}
-                    <div class="div alert alert-danger" role="alert">
-                        {% for error in form.non_field_errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                <form class="form mt-4" action="{% url 'users:create' %}" method="POST">
-                    {% for hidden in form.hidden_fields %}
-                        {{ hidden }}
+    <h1 class="h1">Создание пользователя</h1>
+    {% if messages %}
+        <div class="alert alert-success mt-4">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if form.non_field_errors %}
+        <div class="div alert alert-danger" role="alert">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <form class="form mt-4" action="{% url 'users:create' %}" method="POST">
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="form-login">Логин:</label>
+            <input class="form-control form-control-lg{% if form.username.errors %} is-invalid{% endif %}" type="text" id="form-login" placeholder="Логин" name="username" value="{{ form.username.value|default:'' }}" required autofocus>
+            {% if form.username.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                        <p>{{ error }}</p>
                     {% endfor %}
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="form-login">Логин:</label>
-                        <input class="form-control form-control-lg{% if form.username.errors %} is-invalid{% endif %}" type="text" id="form-login" placeholder="Логин" name="username" value="{{ form.username.value|default:'' }}" required autofocus>
-                        {% if form.username.errors %}
-                            <div class="invalid-feedback">
-                                {% for error in form.username.errors %}
-                                    <p>{{ error }}</p>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="form-group">
-                        <label for="form-password">Пароль:</label>
-                        <input class="form-control form-control-lg" type="password" id="form-password" placeholder="Пароль" name="password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="form-password-confirm">Подтверждение пароля:</label>
-                        <input class="form-control form-control-lg{% if form.password_confirm.errors %} is-invalid{% endif %}" type="password" id="form-password-confirm" placeholder="Подтверждение пароля" name="password_confirm" required>
-                        {% if form.password_confirm.errors %}
-                            <div class="invalid-feedback">
-                                {% for error in form.password_confirm.errors %}
-                                    <p>{{ error }}</p>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="form-row d-flex align-items-center mt-4">
-                        <div class="form-group">
-                            <button class="btn btn-lg btn-primary" type="submit">Создать</button>
-                        </div>
-                    </div>
-                </form>
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="form-password">Пароль:</label>
+            <input class="form-control form-control-lg" type="password" id="form-password" placeholder="Пароль" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="form-password-confirm">Подтверждение пароля:</label>
+            <input class="form-control form-control-lg{% if form.password_confirm.errors %} is-invalid{% endif %}" type="password" id="form-password-confirm" placeholder="Подтверждение пароля" name="password_confirm" required>
+            {% if form.password_confirm.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.password_confirm.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-row d-flex align-items-center mt-4">
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary" type="submit">Создать</button>
             </div>
         </div>
-    </div>
+    </form>
 {% endblock %}

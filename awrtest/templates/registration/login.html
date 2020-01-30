@@ -4,7 +4,7 @@
 {% block description %}Вход на сайт{% endblock %}
 {% block main_section_modifiers %} d-flex align-items-center justify-content-center{% endblock %}
 
-{% block content %}
+{% block main %}
     <form class="form form_small border border-primary rounded p-4" action="{% url 'custom_auth:login' %}" method="post">
         {% for hidden in form.hidden_fields %}
             {{ hidden }}

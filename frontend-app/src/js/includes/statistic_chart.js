@@ -1,14 +1,22 @@
 import templateString from 'es6-template-strings';
 import URI from 'urijs';
+import * as helpers from "./helpers";
 
 const DataLoader = (function() {
-    let data = [];
     return {
-        getData() {
-            return data;
-        },
         loadData() {
-
+            fetch(Filter.getUrl(), {
+                    method: 'GET',
+                    cache: 'no-cache',
+                    credentials: 'same-origin',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        StatisticChart.events.emit('statistic_chart_dataloader_loaded', data);
+                    });
         },
         randomData() {
             let data = [];
@@ -26,6 +34,13 @@ const DataLoader = (function() {
                 });
             }
             return data;
+        },
+        init() {
+            StatisticChart.events.on('statistic_chart_filter_changed', (eventData) => {
+                if (eventData.dataset.updateData) {
+                    this.loadData();
+                }
+            });
         },
     }
 })();
@@ -73,7 +88,7 @@ const Filter = (function() {
                 this.setParam(event.target.getAttribute('name'), event.target.value);
                 clearTimeout(delayTimer);
                 delayTimer = setTimeout(function() {
-                    StatisticChart.events.emit('statistic_chart_filter_changed');
+                    StatisticChart.events.emit('statistic_chart_filter_changed', event.target);
                 }, 300);
             };
             fields = form.querySelectorAll('input, select');
@@ -139,7 +154,7 @@ const Drawer = (function() {
             const stepValue = (max - min) / maxStep;
             let step = 0;
             while (step <= maxStep) {
-                const yOffset = size.height - padding.bottom - stepOffset * step;
+                const yOffset = size.height - padding.bottom - (step ? 5 : 0) - stepOffset * step;
                 svg.line(padding.left, yOffset, size.width, yOffset).stroke({ color: 'rgba(0,0,0,0.1)', width: 1 });
                 let value = Math.round(min + stepValue * step)
                 value = value > max ? max : value;
@@ -349,11 +364,20 @@ const Drawer = (function() {
                 });
 
                 StatisticChart.events.on('statistic_chart_filter_changed', (eventData) => {
-                    this.setData(DataLoader.randomData());
                     this.update();
                 });
 
-                this.setData(DataLoader.randomData());
+                StatisticChart.events.on('statistic_chart_dataloader_loaded', (eventData) => {
+                    if (eventData && eventData.chart_data) {
+                        this.setData(eventData.chart_data);
+                    }
+                    if (eventData && eventData.last_activity) {
+                        document.getElementById('last-activity').innerText = eventData.last_activity
+                    }
+                    this.update();
+                });
+
+                this.setData(window.chart_config && chart_config.data ? chart_config.data : DataLoader.randomData());
             });
             StatisticChart.events.emit('statistic_chart_drawer_init');
         }
@@ -371,6 +395,7 @@ const StatisticChart = (function() {
             const filterForm = document.getElementById('stat-filter');
             if (filterForm) {
                 Filter.init(filterForm);
+                DataLoader.init();
             }
 
             const chartContainer = document.getElementById('stat-chart');

@@ -7,11 +7,11 @@ from django.urls import reverse_lazy
 from .forms import UserUpdateForm
 from django.contrib import messages
 
-decorators = [login_required, permission_required((
+decorators = [permission_required((
     'auth.user.can_view_user',
     'auth.user.can_edit_user',
     'auth.user.can_delete_user',
-))]
+), raise_exception=True)]
 
 
 @method_decorator(decorators, name='dispatch')

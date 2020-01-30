@@ -6,11 +6,23 @@
         <title>{% block title %}{% endblock %}</title>
         <meta name="description" content="{% block description %}{% endblock %}">
         {% load static %}
+        {% load users_utils %}
         <link rel="stylesheet" href="{% static 'awrtest/css/global.css' %}">
     </head>
     <body>
         <div class="section main-section{% block main_section_modifiers %}{% endblock %}">
-            {% block content %}{% endblock %}
+            {% block main %}
+                <div class="container">
+                    <div class="row align-items-stretch mt-4">
+                        {% block menu %}
+                            {% menu %}
+                        {% endblock %}
+                        <div class="content col-12 col-md-8">
+                            {% block content %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
         </div>
         <script src="{% static 'awrtest/js/polyfills.js' %}"></script>
         <script src="{% static 'awrtest/js/vendors~global.js' %}"></script>
