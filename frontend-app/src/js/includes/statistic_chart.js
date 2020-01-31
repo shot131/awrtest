@@ -310,6 +310,7 @@ const Drawer = (function() {
         },
         update() {
             this.clean();
+            window.tippyHideAll && tippyHideAll();
             if (data.length >= 2) {
                 this.legendY();
                 this.legendX();
@@ -339,6 +340,9 @@ const Drawer = (function() {
                 svg.addClass('chart__canvas');
 
                 svg.mousemove(function(event) {
+                    if (!data.length) {
+                        return false;
+                    }
                     const point = svg.point(event.screenX, event.screenY);
                     if (point.x > padding.left) {
                         hoverLine.move(point.x, 0);
@@ -358,9 +362,12 @@ const Drawer = (function() {
                     }
                 });
                 svg.mouseleave(function(event) {
-                     hoverLine.move(-5, 0);
-                     svg.find('.chart__point').stroke('none');
-                     tippyHideAll && tippyHideAll();
+                    if (!data.length) {
+                        return false;
+                    }
+                    hoverLine.move(-5, 0);
+                    svg.find('.chart__point').stroke('none');
+                    tippyHideAll && tippyHideAll();
                 });
 
                 StatisticChart.events.on('statistic_chart_filter_changed', (eventData) => {
