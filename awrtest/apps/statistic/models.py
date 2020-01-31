@@ -9,3 +9,5 @@ class TimeValue(models.Model):
 
     class Meta:
         unique_together = (('time', 'value'),)
+        verbose_name = 'Данные клиента'
+        verbose_name_plural = 'Данные клиента'

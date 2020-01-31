@@ -5,7 +5,7 @@
 {% block main_section_modifiers %} d-flex align-items-center justify-content-center{% endblock %}
 
 {% block main %}
-    <form class="form form_small border border-primary rounded p-4" action="{% url 'custom_auth:login' %}" method="post">
+    <form class="form form_small border border-primary rounded p-4" action="{% url 'auth_extended:login' %}" method="post">
         {% for hidden in form.hidden_fields %}
             {{ hidden }}
         {% endfor %}

@@ -34,9 +34,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.custom_auth',
-    'apps.statistic',
-    'apps.users',
+
+    # my apps
+    'auth_extended.apps.ExtendedAuthConfig',
+    'statistic.apps.StatisticConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -112,6 +114,6 @@ STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static'), )
 
-LOGIN_URL = reverse_lazy('custom_auth:login')
+LOGIN_URL = reverse_lazy('auth_extended:login')
 LOGIN_REDIRECT_URL = reverse_lazy('statistic:statistic')
-LOGOUT_REDIRECT_URL = reverse_lazy('custom_auth:login')
+LOGOUT_REDIRECT_URL = reverse_lazy('auth_extended:login')
