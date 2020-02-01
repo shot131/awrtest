@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'auth_extended.apps.ExtendedAuthConfig',
     'statistic.apps.StatisticConfig',
     'users.apps.UsersConfig',
+    'rest_api.apps.RestApiConfig'
 ]
 
 MIDDLEWARE = [
@@ -111,8 +112,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static'), )
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 LOGIN_URL = reverse_lazy('auth_extended:login')
 LOGIN_REDIRECT_URL = reverse_lazy('statistic:statistic')

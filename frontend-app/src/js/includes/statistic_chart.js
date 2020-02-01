@@ -1,8 +1,8 @@
 import templateString from 'es6-template-strings';
 import URI from 'urijs';
-import * as helpers from "./helpers";
 
 const DataLoader = (function() {
+    let timeInterval;
     return {
         loadData() {
             fetch(Filter.getUrl(), {
@@ -36,6 +36,11 @@ const DataLoader = (function() {
             return data;
         },
         init() {
+            clearInterval(timeInterval);
+            timeInterval = setInterval(() => {
+                this.loadData();
+            }, 300 * 1000);
+
             StatisticChart.events.on('statistic_chart_filter_changed', (eventData) => {
                 if (eventData.dataset.updateData) {
                     this.loadData();
