@@ -5,3 +5,5 @@
 .env
 .log
 /awrtest/static
+/*.ppk
+/*.conf

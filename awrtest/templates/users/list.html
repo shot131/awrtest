@@ -33,7 +33,7 @@
         {% endfor %}
         </tbody>
     </table>
-    {% if paginator.count %}
+    {% if paginator.num_pages > 1 %}
         <nav>
             <ul class="pagination">
                 {% if page_obj.has_previous %}

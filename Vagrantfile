@@ -86,8 +86,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "vagrant/setup.sh", env: env_vars
   config.vm.provision "shell", path: "vagrant/on_up.sh", run: "always", env: env_vars
 
-#   config.trigger.before :destroy, :halt do |trigger|
-#     trigger.info = "Backing up db"
-#     trigger.run_remote = {path: "vagrant/db_backup.sh", env: env_vars}
-#   end
+  config.trigger.before :destroy, :halt do |trigger|
+    trigger.info = "Backing up db"
+    trigger.run_remote = {path: "vagrant/db_backup.sh", env: env_vars}
+  end
 end
