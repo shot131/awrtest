@@ -229,7 +229,7 @@ const Drawer = (function() {
             const colors = {
                 min: { color: '#007bff', name: 'Минимум' },
                 middle: { color: '#6c757d', name: 'Среднее'},
-                max: { color: '#00aa5b', name: 'Масимум'},
+                max: { color: '#00aa5b', name: 'Максимум'},
             };
             const lines = {min: [], middle: [], max:[]};
             const groupedData = {};
